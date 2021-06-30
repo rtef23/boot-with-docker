@@ -1,0 +1,5 @@
+rootProject.name = 'boot-with-docker'
+
+include 'A'
+include 'B'
+

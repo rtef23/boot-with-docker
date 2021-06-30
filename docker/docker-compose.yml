@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  a-application:
+    container_name: a-application
+#    hostname: host-a.com
+    image: openjdk:11.0.11-slim
+    volumes:
+      - "../:/usr/src/app-root"
+    working_dir: /usr/src/myapp
+    command: bash -c "cp -r /usr/src/app-root/* ./ && ./gradlew :A:bootRun"
+    ports:
+      - 8001:8001
+    networks:
+      - test-network
+  #    depends_on:
+#      - b-application
+
+  b-application:
+    container_name: b-application
+#    hostname: host-b.com
+    image: openjdk:11.0.11-slim
+    volumes:
+      - "../:/usr/src/app-root"
+    working_dir: /usr/src/myapp
+    command: bash -c "cp -r /usr/src/app-root/* ./ && ./gradlew :B:bootRun"
+    ports:
+      - 8002:8002
+    networks:
+      - test-network
+
+networks:
+  test-network:
+    driver: bridge
