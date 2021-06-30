@@ -34,3 +34,11 @@ springBoot {
 test {
     useJUnitPlatform()
 }
+
+bootRun {
+    if(System.getProperty("debug", "false") == "true") {
+        String debugPort = System.getProperty("debug_port", "5005")
+
+        jvmArgs("-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:".concat(debugPort))
+    }
+}

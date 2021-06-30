@@ -8,9 +8,10 @@ services:
     volumes:
       - "../:/usr/src/app-root"
     working_dir: /usr/src/myapp
-    command: bash -c "cp -r /usr/src/app-root/* ./ && ./gradlew :A:bootRun"
+    command: bash -c "cp -r /usr/src/app-root/* ./ && ./gradlew :A:bootRun -Ddebug=true -Ddebug_port=9000"
     ports:
       - 8001:8001
+      - 8000:9000
     networks:
       - test-network
   #    depends_on:
